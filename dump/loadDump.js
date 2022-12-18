@@ -1,11 +1,7 @@
 const fs = require("fs");
 const {validateObjectId} = require("../helpers");
 const {
-    userCollection,
-    restaurantsCollection,
-    orderCollection,
-    reviewMenuItem,
-    reviewRestaurant
+    userCollection, restaurantsCollection, orderCollection, reviewMenuItem, reviewRestaurant
 } = require("../config/mongoCollections");
 const path = require("path");
 
@@ -15,6 +11,7 @@ const loadUserCollection = async () => {
         v._id = validateObjectId(v._id);
     })
     const userCol = await userCollection()
+    await userCol.deleteMany({});
     await userCol.insertMany(users);
 }
 const loadRestaurantCollection = async () => {
@@ -26,11 +23,14 @@ const loadRestaurantCollection = async () => {
         })
     })
     const col = await restaurantsCollection()
+    await col.deleteMany({})
     await col.insertMany(data);
 }
 const loadOrdersCollection = async () => {
     let data = JSON.parse(fs.readFileSync(path.join(__dirname, 'orders.json')) + "");
     const col = await orderCollection()
+    await col.deleteMany({})
+
     await col.insertMany(data);
 }
 
@@ -41,6 +41,8 @@ const loadReviewMenuItemCollection = async () => {
         v._id = validateObjectId(v._id);
     })
     const col = await reviewMenuItem()
+    await col.deleteMany({})
+
     await col.insertMany(data);
 }
 const loadReviewRestaurantCollection = async () => {
@@ -49,6 +51,8 @@ const loadReviewRestaurantCollection = async () => {
         v._id = validateObjectId(v._id);
     })
     const col = await reviewRestaurant()
+    await col.deleteMany({})
+
     await col.insertMany(data);
 }
 
