@@ -76,7 +76,7 @@ const updateUser = async (email, first_name, last_name, phone, address, birth_da
             first_name, last_name, phone, address, birth_date
         }
     })
-    if (info.matchedCount === 0) throw `Restaurant not found for email ${email}`;
+    if (info.matchedCount === 0) throw `User not found for email ${email}`;
 }
 
 
