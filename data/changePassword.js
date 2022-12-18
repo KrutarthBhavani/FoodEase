@@ -5,6 +5,7 @@ const {findRestaurantByResId, verifyUsernameAndPasswordOfRestaurant} = require("
 const changeUserPassword = async (email, prevPassword, password) => {
     await findUserByEmail(email, true);
     validatePassword(prevPassword)
+    validatePassword(password)
     try {
         await verifyEmailPasswordOfUser(email, prevPassword);
     } catch (e) {
@@ -23,6 +24,7 @@ const changeUserPassword = async (email, prevPassword, password) => {
 const changeRestaurantPassword = async (restaurantId, prevPassword, password) => {
     await findRestaurantByResId(restaurantId);
     validatePassword(prevPassword);
+    validatePassword(password)
     try {
         await verifyUsernameAndPasswordOfRestaurant(restaurantId, prevPassword);
     } catch (e) {
